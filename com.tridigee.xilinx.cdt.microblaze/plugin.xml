@@ -1075,4 +1075,32 @@
          </tool>
       </toolChain>
    </extension>
+   
+   <!-- MicroBlaze Scanner Collector -->
+   <extension
+         id="com.xilinx.managedbuilder.ui.MBGCCManagedMakePerProjectProfileC"
+         name="MB C/C++ managed make per project SCD profile"
+         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
+      <scannerInfoCollector
+            class="com.tridigee.xilinx.cdt.scannerconfig.MBGCCScannerInfoCollector"
+            scope="project">
+      </scannerInfoCollector>
+      <buildOutputProvider>
+         <open></open>
+         <scannerInfoConsoleParser
+               class="com.tridigee.xilinx.cdt.scannerconfig.ManagedMBGCCScannerInfoConsoleParser">
+         </scannerInfoConsoleParser>
+      </buildOutputProvider>
+      <scannerInfoProvider
+            providerId="specsFile">
+         <run
+               arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}"
+               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
+               command="mb-gcc">
+         </run>
+         <scannerInfoConsoleParser
+               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
+         </scannerInfoConsoleParser>
+      </scannerInfoProvider>
+   </extension>
 </plugin>
