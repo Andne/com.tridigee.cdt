@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="com.xilinx.sdk.managedbuilder.XELF.mb"
+         name="Xilinx MicroBlaze ELF"
+         point="org.eclipse.cdt.core.BinaryParser">
+      <cextension>
+         <run
+               class="org.eclipse.cdt.utils.elf.parser.GNUElfParser">
+         </run>
+      </cextension>
+   </extension>
+   <extension
+         id="xilinx.managed.build.info"
+         name="Xilinx Managed Build Tools"
+         point="org.eclipse.cdt.managedbuilder.core.buildDefinitions">
+      <managedBuildRevision
+            fileVersion="1.0.0">
+      </managedBuildRevision>
+      <builder
+            command="make"
+            id="xilinx.gnu.make"
+            isAbstract="false"
+            isVariableCaseSensitive="false"
+            name="GNU make"
+            superClass="cdt.managedbuild.target.gnu.builder">
+      </builder>
+      
+      <!-- Common Tool Information -->
+      <tool
+            name="Xilinx GNU Assembler"
+            outputFlag="-o"
+            id="xilinx.gnu.assembler"
+            isAbstract="true"
+            natureFilter="both"
+            errorParsers="org.eclipse.cdt.core.GASErrorParser">
+         <optionCategory
+               owner="xilinx.gnu.assembler"
+               name="General"
+               id="xilinx.gnu.assembler.category.general">
+         </optionCategory>
+         <option
+               name="Assembler Flags"
+               category="xilinx.gnu.assembler.category.general"
+               valueType="string"
+               id="xilinx.gnu.both.assembler.option.flags">
+         </option>
+         <option
+               command="-I"
+               valueType="includePath"
+               category="xilinx.gnu.assembler.category.general"
+               browseType="directory"
+               name="Include Paths (-I)"
+               id="xilinx.gnu.both.asm.option.include.paths"/>
+         <option
+               command="-W"
+               defaultValue="false"
+               valueType="boolean"
+               category="xilinx.gnu.assembler.category.general"
+               name="Suppress warnings (-W)"
+               id="xilinx.gnu.both.asm.option.warnings.nowarn"/>
+         <option
+               command="-v"
+               defaultValue="false"
+               valueType="boolean"
+               category="xilinx.gnu.assembler.category.general"
+               name="Announce version (-v)"
+               id="xilinx.gnu.both.asm.option.version"/>
+         <inputType
+               sources="s"
+               id="xilinx.gnu.assembler.input">
+         </inputType>
+         <outputType
+               outputs="o"
+               buildVariable="OBJS"
+               id="xilinx.gnu.assembler.output">
+         </outputType>
+      </tool>
+      <tool
+            name="Xilinx GNU Linkers"
+            outputFlag="-o"
+            isAbstract="true"
+            id="xilinx.gnu.linker"
+            errorParsers="org.eclipse.cdt.core.GLDErrorParser">
+         <supportedProperties>
+            <property id="org.eclipse.cdt.build.core.buildArtefactType">
+               <value id="org.eclipse.cdt.build.core.buildArtefactType.exe"/>
+            </property>
+         </supportedProperties>
+         <envVarBuildPath
+               pathType="buildpathLibrary"
+               variableList="LIBRARY_PATH">
+         </envVarBuildPath>
+         <optionCategory
+               name="General"
+               id="xilinx.gnu.c.link.category.general">
+         </optionCategory>
+         <option
+               defaultValue="false"
+               name="Do not use standard start files (-nostartfiles)"
+               category="xilinx.gnu.c.link.category.general"
+               command="-nostartfiles"
+               id="xilinx.gnu.c.link.option.nostart"
+               valueType="boolean">
+         </option>
+         <option
+               defaultValue="false"
+               name="Do not use default libraries (-nodefaultlibs)"
+               category="xilinx.gnu.c.link.category.general"
+               command="-nodefaultlibs"
+               id="xilinx.gnu.c.link.option.nodeflibs"
+               valueType="boolean">
+         </option>
+         <option
+               defaultValue="false"
+               name="No startup or default libs (-nostdlib)"
+               category="xilinx.gnu.c.link.category.general"
+               command="-nostdlib"
+               id="xilinx.gnu.c.link.option.nostdlibs"
+               valueType="boolean">
+         </option>
+         <option
+               defaultValue="false"
+               name="Omit all Symbol Information (-s)"
+               category="xilinx.gnu.c.link.category.general"
+               command="-s"
+               id="xilinx.gnu.c.link.option.strip"
+               valueType="boolean">
+         </option>
+         <optionCategory
+               name="Libraries"
+               id="xilinx.gnu.c.link.category.libs">
+         </optionCategory>
+         <option
+               name="Libraries (-l)"
+               category="xilinx.gnu.c.link.category.libs"
+               command="-l"
+               id="xilinx.gnu.c.link.option.libs"
+               browseType="none"
+               valueType="libs">
+         </option>
+         <option
+               name="Library search path (-L)"
+               category="xilinx.gnu.c.link.category.libs"
+               command="-L"
+               id="xilinx.gnu.c.link.option.paths"
+               browseType="directory"
+               valueType="libPaths">
+         </option>
+         <optionCategory
+               name="Miscellaneous"
+               id="xilinx.gnu.c.link.category.other">
+         </optionCategory>
+         <option
+               name="Linker Flags"
+               category="xilinx.gnu.c.link.category.other"
+               valueType="string"
+               id="xilinx.gnu.c.link.option.ldflags">
+         </option>
+         <option
+               name="Other options (-XLinker [option])"
+               category="xilinx.gnu.c.link.category.other"
+               command="-Xlinker ${VALUE}"
+               valueType="stringList"
+               id="xilinx.gnu.c.link.option.other">
+         </option>
+         <option
+               name="Other Objects"
+               category="xilinx.gnu.c.link.category.other"
+               browseType="file"
+               valueType="userObjs"
+               id="xilinx.gnu.c.link.option.userobjs">
+         </option>
+         <optionCategory
+               id="xilinx.gnu.c.linker.category.lscript"
+               name="Linker Script">
+         </optionCategory>
+         <option
+               browseType="file"
+               category="xilinx.gnu.c.linker.category.lscript"
+               command="-Wl,-T -Wl,"
+               id="xilinx.gnu.c.linker.option.lscript"
+               isAbstract="false"
+               name="Linker Script"
+               resourceFilter="all"
+               tip="Path to Linker Script (relative to the build folder)"
+               valueType="string">
+         </option>
+         <option
+               command="-pg"
+               defaultValue="false"
+               id="xilinx.gnu.c.linker.option.pg"
+               isAbstract="false"
+               name="Enable Profiling"
+               resourceFilter="all"
+               valueType="boolean">
+         </option>
+         <optionCategory
+               id="xilinx.gnu.linker.inferred.category"
+               name="Inferred Options">
+         </optionCategory>
+         <optionCategory
+               id="xilinx.gnu.linker.inferred.category.swplatform"
+               name="Software Platform"
+               owner="xilinx.gnu.linker.inferred.category">
+         </optionCategory>
+         <option
+               category="xilinx.gnu.linker.inferred.category.swplatform"
+               id="xilinx.gnu.linker.inferred.swplatform.flags"
+               isAbstract="false"
+               name="Software Platform Inferred Flags"
+               resourceFilter="all"
+               tip="Linker Flags Inferred from current Software Platform"
+               valueType="libs">
+         </option>
+         <option
+               browseType="directory"
+               category="xilinx.gnu.linker.inferred.category.swplatform"
+               command="-L"
+               id="xilinx.gnu.linker.inferred.swplatform.lpath"
+               isAbstract="false"
+               name="Software Platform Library Path"
+               resourceFilter="all"
+               tip="Software Platform Library Path"
+               valueType="libPaths">
+         </option>
+         <optionCategory
+               id="xilinx.gnu.linker.inferred.category.hwplatform"
+               name="Processor Options"
+               owner="xilinx.gnu.linker.inferred.category">
+         </optionCategory>
+         <inputType
+               buildVariable="OBJS"
+               id="xilinx.gnu.linker.input"
+               multipleOfType="true"
+               sourceContentType="org.eclipse.cdt.managedbuilder.core.compiledObjectFile"
+               sources="o">
+            <additionalInput
+                  kind="additionalinputdependency"
+                  paths="$(USER_OBJS)">
+            </additionalInput>
+            <additionalInput
+                  kind="additionalinput"
+                  paths="$(LIBS)">
+            </additionalInput>
+         </inputType>
+         <inputType
+               id="xilinx.gnu.linker.input.lscript"
+               multipleOfType="false"
+               name="Linker Script"
+               option="xilinx.gnu.c.linker.option.lscript"
+               sources="ld">
+         </inputType>
+         <outputType
+               buildVariable="EXECUTABLES"
+               id="xilinx.gnu.linker.output"
+               nameProvider="org.eclipse.cdt.managedbuilder.makegen.gnu.GnuLinkOutputNameProvider">
+         </outputType>
+      </tool>
+      
+      <!-- MicroBlaze Tools -->
+      <tool
+            command="mb-as"
+            id="xilinx.gnu.mb.c.assembler"
+            isAbstract="false"
+            name="MicroBlaze gcc assembler"
+            superClass="xilinx.gnu.assembler">
+         <option
+               category="xilinx.gnu.assembler.category.general"
+               command="-mlittle-endian"
+               id="xilinx.gnu.mb.assembler.usele"
+               isAbstract="false"
+               name="Produce little endian code (-mlittle-endian)"
+               resourceFilter="all"
+               tip="Produce little endian code"
+               valueType="boolean">
+         </option>
+      </tool>
+      <tool
+            command="mb-ar"
+            id="xilinx.gnu.mb.archiver"
+            isAbstract="false"
+            name="MicroBlaze archiver"
+            superClass="cdt.managedbuild.tool.gnu.archiver">
+      </tool>
+      <tool
+            command="mb-gcc"
+            errorParsers="org.eclipse.cdt.core.GCCErrorParser"
+            id="xilinx.gnu.mb.c.compiler"
+            isAbstract="false"
+            name="MicroBlaze gcc compiler"
+            superClass="xilinx.gnu.compiler.mb"
+            natureFilter="cnature"
+            outputFlag="-o">
+         <supportedProperties>
+            <property
+                  id="org.eclipse.cdt.build.core.buildType">
+               <value
+                     id="org.eclipse.cdt.build.core.buildType.debug">
+               </value>
+               <value
+                     id="org.eclipse.cdt.build.core.buildType.release">
+               </value>
+            </property>
+         </supportedProperties>
+         <inputType
+               dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.gnu.DefaultGCCDependencyCalculator2"
+               dependencyContentType="org.eclipse.cdt.core.cHeader"
+               dependencyExtensions="h"
+               id="xilinx.gnu.compiler.input"
+               languageId="org.eclipse.cdt.core.gcc"
+               name="C source files"
+               scannerConfigDiscoveryProfileId="com.xilinx.managedbuilder.ui.MBGCCManagedMakePerProjectProfileC"
+               sources="c,S">
+         </inputType>
+         <outputType
+               buildVariable="OBJS"
+               id="xilinx.gnu.compiler.output"
+               outputs="o">
+         </outputType>
+      </tool>
+      <tool
+            command="mb-g++"
+            errorParsers="org.eclipse.cdt.core.GCCErrorParser"
+            id="xilinx.gnu.mb.cxx.compiler"
+            isAbstract="false"
+            name="MicroBlaze g++ compiler"
+            superClass="xilinx.gnu.compiler.mb"
+            natureFilter="ccnature"
+            outputFlag="-o">
+         <supportedProperties>
+            <property
+                  id="org.eclipse.cdt.build.core.buildType">
+               <value
+                     id="org.eclipse.cdt.build.core.buildType.debug">
+               </value>
+               <value
+                     id="org.eclipse.cdt.build.core.buildType.release">
+               </value>
+            </property>
+         </supportedProperties>
+         <inputType
+               dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.gnu.DefaultGCCDependencyCalculator2"
+               dependencyContentType="org.eclipse.cdt.core.cxxHeader"
+               dependencyExtensions="h,H,hpp"
+               id="xilinx.gnu.mb.cxx.compiler.input"
+               languageId="org.eclipse.cdt.core.g++"
+               name="C++ source files"
+               scannerConfigDiscoveryProfileId="com.xilinx.managedbuilder.ui.MBGCCManagedMakePerProjectProfileC"
+               sources="c,C,cc,cxx,cpp,S">
+         </inputType>
+         <outputType
+               buildVariable="OBJS"
+               id="xilinx.gnu.mb.cxx.compiler.output"
+               outputs="o">
+         </outputType>
+      </tool>
+      <tool
+            command="mb-gcc"
+            id="xilinx.gnu.mb.c.linker"
+            isAbstract="false"
+            name="MicroBlaze gcc linker"
+            natureFilter="cnature"
+            superClass="xilinx.gnu.mb.linker">
+      </tool>
+      <tool
+            command="mb-g++"
+            id="xilinx.gnu.mb.cxx.linker"
+            isAbstract="false"
+            name="MicroBlaze g++ linker"
+            natureFilter="ccnature"
+            superClass="xilinx.gnu.mb.linker">
+      </tool>
+      <tool
+            command="mb-size"
+            commandLinePattern="${COMMAND} ${FLAGS} ${INPUTS} |tee ${OUTPUT}"
+            id="xilinx.gnu.mb.size"
+            isAbstract="false"
+            name="MicroBlaze Print Size">
+         <option
+               defaultValue="${BuildArtifactFilePrefix}${BuildArtifactFileName}"
+               id="xilinx.gnu.mb.size.input"
+               isAbstract="false"
+               name="Input File"
+               resourceFilter="all"
+               value="${BuildArtifactFilePrefix}${BuildArtifactFileName}"
+               valueType="string">
+         </option>
+         <inputType
+               id="xilinx.gnu.mb.size.inputtype"
+               multipleOfType="true"
+               option="xilinx.gnu.mb.size.input"
+               primaryInput="false">
+         </inputType>
+         <outputType
+               buildVariable="ELFSIZE"
+               id="xilinx.gnu.mb.size.output"
+               namePattern="%"
+               outputNames="${BuildArtifactFilePrefix}${BuildArtifactFileName}.size"
+               outputs="size"
+               primaryOutput="true">
+         </outputType>
+      </tool>
+    
+      <!-- MicroBlaze Toolchain -->
+      <toolChain
+            id="xilinx.gnu.mb.toolchain"
+            isAbstract="false"
+            name="Xilinx MicroBlaze GNU Toolchain"
+            scannerConfigDiscoveryProfileId="com.xilinx.managedbuilder.ui.MBGCCManagedMakePerProjectProfileC"
+            targetTool="xilinx.gnu.mb.c.linker;xilinx.gnu.mb.cxx.linker;xilinx.gnu.mb.archiver">
+         <targetPlatform
+               binaryParser="com.xilinx.sdk.managedbuilder.XELF.mb"
+               id="xilinx.mb.target.gnu.base"
+               isAbstract="false"
+               name="Debug Platform">
+         </targetPlatform>
+         <builder
+               id="xilinx.gnu.mb.toolchain.builder"
+               isAbstract="false"
+               isVariableCaseSensitive="false"
+               superClass="xilinx.gnu.make">
+         </builder>
+	     <tool
+	           id="xilinx.gnu.mb.c.toolchain.assembler"
+	           isAbstract="false"
+	           superClass="xilinx.gnu.mb.c.assembler">
+	     </tool>
+	     <tool
+	           id="xilinx.gnu.mb.c.toolchain.compiler"
+	           isAbstract="false"
+	           superClass="xilinx.gnu.mb.c.compiler">
+	     </tool>
+	     <tool
+	           id="xilinx.gnu.mb.cxx.toolchain.compiler"
+	           isAbstract="false"
+	           superClass="xilinx.gnu.mb.cxx.compiler">
+	     </tool>
+         <tool
+               id="xilinx.gnu.mb.toolchain.archiver"
+               isAbstract="false"
+               superClass="xilinx.gnu.mb.archiver">
+            <enablement
+                  type="ALL">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildArtefactType"
+                     value="org.eclipse.cdt.build.core.buildArtefactType.staticLib">
+               </checkBuildProperty>
+            </enablement>
+         </tool>
+         <tool
+               id="xilinx.gnu.mb.c.toolchain.linker"
+               isAbstract="false"
+               superClass="xilinx.gnu.mb.c.linker">
+            <enablement
+                  type="ALL">
+               <not>
+                  <checkBuildProperty
+                        property="org.eclipse.cdt.build.core.buildArtefactType"
+                        value="org.eclipse.cdt.build.core.buildArtefactType.staticLib">
+                  </checkBuildProperty>
+               </not>
+            </enablement>
+         </tool>
+         <tool
+               id="xilinx.gnu.mb.cxx.toolchain.linker"
+               isAbstract="false"
+               superClass="xilinx.gnu.mb.cxx.linker">
+            <enablement
+                  type="ALL">
+               <not>
+                  <checkBuildProperty
+                        property="org.eclipse.cdt.build.core.buildArtefactType"
+                        value="org.eclipse.cdt.build.core.buildArtefactType.staticLib">
+                  </checkBuildProperty>
+               </not>
+            </enablement>
+         </tool>
+      </toolChain>
+   </extension>
+</plugin>
