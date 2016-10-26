@@ -537,6 +537,7 @@
             </additionalInput>
          </inputType>
          <inputType
+               dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.internal.DefaultNoDependencyCalculator"
                id="xilinx.gnu.linker.input.lscript"
                multipleOfType="false"
                name="Linker Script"
@@ -787,7 +788,6 @@
                id="xilinx.gnu.compiler.input"
                languageId="org.eclipse.cdt.core.gcc"
                name="C source files"
-               scannerConfigDiscoveryProfileId="com.xilinx.managedbuilder.ui.MBGCCManagedMakePerProjectProfileC"
                sources="c,S">
          </inputType>
          <outputType
@@ -823,7 +823,6 @@
                id="xilinx.gnu.mb.cxx.compiler.input"
                languageId="org.eclipse.cdt.core.g++"
                name="C++ source files"
-               scannerConfigDiscoveryProfileId="com.xilinx.managedbuilder.ui.MBGCCManagedMakePerProjectProfileC"
                sources="c,C,cc,cxx,cpp,S">
          </inputType>
          <outputType
@@ -1004,7 +1003,6 @@
             id="xilinx.gnu.mb.toolchain"
             isAbstract="false"
             name="Xilinx MicroBlaze GNU Toolchain"
-            scannerConfigDiscoveryProfileId="com.xilinx.managedbuilder.ui.MBGCCManagedMakePerProjectProfileC"
             targetTool="xilinx.gnu.mb.c.linker;xilinx.gnu.mb.cxx.linker;xilinx.gnu.mb.archiver">
          <targetPlatform
                binaryParser="com.xilinx.sdk.managedbuilder.XELF.mb"
