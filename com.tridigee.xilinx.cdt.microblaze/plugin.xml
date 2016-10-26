@@ -78,6 +78,297 @@
          </outputType>
       </tool>
       <tool
+            id="xilinx.gnu.compiler"
+            isAbstract="true"
+            name="Xilinx GNU compilers">
+         <envVarBuildPath
+               pathType="buildpathInclude"
+               variableList="CPATH,C_INCLUDE_PATH">
+         </envVarBuildPath>
+         <optionCategory
+               id="xilinx.gnu.compiler.symbolscategory"
+               name="Symbols">
+         </optionCategory>
+         <option
+               category="xilinx.gnu.compiler.symbolscategory"
+               command="-D"
+               id="xilinx.gnu.compiler.symbols.defined"
+               isAbstract="false"
+               name="Defined symbols (-D)"
+               resourceFilter="all"
+               valueType="definedSymbols">
+         </option>
+         <option
+               category="xilinx.gnu.compiler.symbolscategory"
+               command="-U"
+               id="xilinx.gnu.compiler.symbols.undefined"
+               isAbstract="false"
+               name="Undefined symbols (-U)"
+               resourceFilter="all"
+               valueType="undefDefinedSymbols">
+         </option>
+         <optionCategory
+               name="Warnings"
+               id="xilinx.gnu.compiler.category.warnings">
+         </optionCategory>
+         <option
+               category="xilinx.gnu.compiler.category.warnings"
+               command="-Wall"
+               defaultValue="true"
+               id="xilinx.gnu.compiler.option.warnings.allwarn"
+               name="All warnings (-Wall)"
+               valueType="boolean">
+         </option>
+         <option
+               category="xilinx.gnu.compiler.category.warnings"
+               command="-Werror"
+               defaultValue="false"
+               id="xilinx.gnu.compiler.option.warnings.toerrors"
+               name="Warnings as errors (-Werror)"
+               valueType="boolean">
+         </option>
+         <option
+               defaultValue="false"
+               name="Check syntax only (-fsyntax-only)"
+               category="xilinx.gnu.compiler.category.warnings"
+               command="-fsyntax-only"
+               id="xilinx.gnu.compiler.option.warnings.syntax"
+               valueType="boolean">
+         </option>
+         <option
+               defaultValue="false"
+               name="Pedantic (-pedantic)"
+               category="xilinx.gnu.compiler.category.warnings"
+               command="-pedantic"
+               id="xilinx.gnu.compiler.option.warnings.pedantic"
+               valueType="boolean">
+         </option>
+         <option
+               defaultValue="false"
+               name="Pedantic warnings as errors (-pedantic-errors)"
+               category="xilinx.gnu.compiler.category.warnings"
+               command="-pedantic-errors"
+               id="xilinx.gnu.compiler.option.warnings.pedantic.error"
+               valueType="boolean">
+         </option>
+         <option
+               defaultValue="false"
+               name="Inhibit all warnings (-w)"
+               category="xilinx.gnu.compiler.category.warnings"
+               command="-w"
+               id="xilinx.gnu.compiler.option.warnings.nowarn"
+               valueType="boolean">
+         </option>
+         <optionCategory
+               name="Optimization"
+               id="xilinx.gnu.compiler.category.optimization">
+         </optionCategory>
+         <option
+               name="Optimization Level"
+               category="xilinx.gnu.compiler.category.optimization"
+               id="xilinx.gnu.compiler.option.optimization.level"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  name="None (-O0)"
+                  command="-O0"
+                  id="gnu.c.optimization.level.none">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  name="Optimize (-O1)"
+                  command="-O1"
+                  id="gnu.c.optimization.level.optimize">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  name="Optimize more (-O2)"
+                  command="-O2"
+                  id="gnu.c.optimization.level.more">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  name="Optimize most (-O3)"
+                  command="-O3"
+                  id="gnu.c.optimization.level.most">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-Os"
+                  id="gnu.c.optimization.level.size"
+                  name="Optimize for size (-Os)">
+            </enumeratedOptionValue>
+            <enablement
+                  type="CONTAINER_ATTRIBUTE"
+                  attribute="defaultValue"
+                  value="gnu.c.optimization.level.more"
+                  extensionAdjustment="false">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildType"
+                     value="org.eclipse.cdt.build.core.buildType.release"/>
+            </enablement>
+            <enablement
+                  type="CONTAINER_ATTRIBUTE"
+                  attribute="defaultValue"
+                  value="gnu.c.optimization.level.none"
+                  extensionAdjustment="false">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildType"
+                     value="org.eclipse.cdt.build.core.buildType.debug"/>
+            </enablement>
+         </option>
+         <option
+               name="Other optimization flags"
+               category="xilinx.gnu.compiler.category.optimization"
+               id="xilinx.gnu.compiler.option.optimization.flags"
+               valueType="string">
+         </option>
+         <optionCategory
+               name="Debugging"
+               id="xilinx.gnu.compiler.category.debug">
+         </optionCategory>
+         <option
+               name="Debug Level"
+               category="xilinx.gnu.compiler.category.debug"
+               id="xilinx.gnu.compiler.option.debugging.level"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  name="None"
+                  isDefault="false"
+                  id="gnu.c.debugging.level.none">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  name="Minimal (-g1)"
+                  command="-g1"
+                  id="gnu.c.debugging.level.minimal">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  name="Default (-g)"
+                  isDefault="true"
+                  command="-g"
+                  id="gnu.c.debugging.level.default">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  name="Maximum (-g3)"
+                  isDefault="false"
+                  command="-g3"
+                  id="gnu.c.debugging.level.max">
+            </enumeratedOptionValue>
+            <enablement
+                  type="CONTAINER_ATTRIBUTE"
+                  attribute="value"
+                  value="gnu.c.debugging.level.none"
+                  extensionAdjustment="false">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildType"
+                     value="org.eclipse.cdt.build.core.buildType.release"/>
+            </enablement>
+            <enablement
+                  type="CONTAINER_ATTRIBUTE"
+                  attribute="value"
+                  value="gnu.c.debugging.level.max"
+                  extensionAdjustment="false">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildType"
+                     value="org.eclipse.cdt.build.core.buildType.debug"/>
+            </enablement>
+         </option>
+         <option
+               name="Other debugging flags"
+               category="xilinx.gnu.compiler.category.debug"
+               id="xilinx.gnu.compiler.option.debugging.other"
+               valueType="string">
+         </option>
+         <optionCategory
+               id="xilinx.gnu.compiler.category.profile"
+               name="Profiling">
+         </optionCategory>
+         <option
+               category="xilinx.gnu.compiler.category.profile"
+               command="-pg"
+               defaultValue="false"
+               id="xilinx.gnu.compiler.option.profiling.enable"
+               isAbstract="false"
+               name="Enable Profiling (-pg)"
+               resourceFilter="all"
+               valueType="boolean">
+         </option>
+         <optionCategory
+               id="xilinx.gnu.compiler.dircategory"
+               name="Directories"
+               owner="xilinx.gnu.compiler">
+         </optionCategory>
+         <option
+               browseType="directory"
+               category="xilinx.gnu.compiler.dircategory"
+               command="-I"
+               id="xilinx.gnu.compiler.dircategory.includes"
+               isAbstract="false"
+               name="Include Paths"
+               valueType="includePath">
+         </option>
+         <optionCategory
+               id="xilinx.gnu.compiler.misc.category"
+               name="Miscellaneous">
+         </optionCategory>
+         <option
+               category="xilinx.gnu.compiler.misc.category"
+               defaultValue="-c -fmessage-length=0"
+               id="xilinx.gnu.compiler.misc.other"
+               isAbstract="false"
+               name="Other flags"
+               valueType="string">
+         </option>
+         <option
+               category="xilinx.gnu.compiler.misc.category"
+               command="-v"
+               defaultValue="false"
+               id="xilinx.gnu.compiler.misc.verbose"
+               isAbstract="false"
+               name="Verbose (-v)"
+               resourceFilter="all"
+               valueType="boolean">
+         </option>
+         <option
+               category="xilinx.gnu.compiler.misc.category"
+               command="-ansi"
+               defaultValue="false"
+               id="xilinx.gnu.compiler.misc.ansi"
+               isAbstract="false"
+               name="Support ANSI programs (-ansi)"
+               valueType="boolean">
+         </option>
+         <optionCategory
+               id="xilinx.gnu.compiler.inferred.category"
+               name="Inferred Options">
+         </optionCategory>
+         <optionCategory
+               id="xilinx.gnu.compiler.inferred.category.swplatform"
+               name="Software Platform"
+               owner="xilinx.gnu.compiler.inferred.category">
+         </optionCategory>
+         <option
+               category="xilinx.gnu.compiler.inferred.category.swplatform"
+               id="xilinx.gnu.compiler.inferred.swplatform.flags"
+               isAbstract="false"
+               name="Software Platform Inferred Flags"
+               resourceFilter="all"
+               tip="Compiler Flags Inferred from current Software Platform"
+               valueType="string">
+         </option>
+         <option
+               browseType="directory"
+               category="xilinx.gnu.compiler.inferred.category.swplatform"
+               command="-I"
+               id="xilinx.gnu.compiler.inferred.swplatform.includes"
+               isAbstract="false"
+               name="Software Platform Include Path"
+               resourceFilter="all"
+               tip="Software Platform Include Path"
+               valueType="includePath">
+         </option>
+         <optionCategory
+              id="xilinx.gnu.compiler.inferred.category.hwplatform"
+              name="Processor Options"
+              owner="xilinx.gnu.compiler.inferred.category">
+         </optionCategory>
+      </tool>
+      <tool
             name="Xilinx GNU Linkers"
             outputFlag="-o"
             isAbstract="true"
@@ -258,6 +549,59 @@
                nameProvider="org.eclipse.cdt.managedbuilder.makegen.gnu.GnuLinkOutputNameProvider">
          </outputType>
       </tool>
+      <tool
+            command="elfcheck"
+            commandLinePattern="${COMMAND} ${FLAGS} ${INPUTS} |tee ${OUTPUT}"
+            id="xilinx.elfcheck.tool"
+            isAbstract="true"
+            name="Xilinx ELF Check">
+         <optionCategory
+               id="xilinx.elfcheck.options.category"
+               name="Options">
+         </optionCategory>
+         <option
+               category="xilinx.elfcheck.options.category"
+               id="xilinx.elfcheck.input.elf"
+               isAbstract="false"
+               name="Input File"
+               resourceFilter="all"
+               value="${BuildArtifactFilePrefix}${BuildArtifactFileName}"
+               valueType="string">
+         </option>
+         <inputType
+               id="xilinx.elfcheck.inputtype"
+               multipleOfType="true"
+               option="xilinx.elfcheck.input.elf"
+               primaryInput="true">
+         </inputType>
+         <outputType
+               buildVariable="ELFCHECK"
+               id="xilinx.elfcheck.output"
+               namePattern="%"
+               outputNames="${BuildArtifactFilePrefix}${BuildArtifactFileName}.elfcheck"
+               outputs="elfcheck"
+               primaryOutput="true">
+         </outputType>
+         <option
+               browseType="none"
+               category="xilinx.elfcheck.options.category"
+               id="xilinx.elfcheck.option.hwspec"
+               isAbstract="false"
+               name="Hardware Specification"
+               resourceFilter="all"
+               tip="Path to Hardware Description File"
+               valueType="string">
+         </option>
+         <option
+               category="xilinx.elfcheck.options.category"
+               id="xilinx.elfcheck.option.procname"
+               isAbstract="false"
+               name="Processor Name"
+               resourceFilter="all"
+               tip="Name of Target Processor in the Hardware Description"
+               valueType="string">
+         </option>
+      </tool>
       
       <!-- MicroBlaze Tools -->
       <tool
@@ -283,6 +627,138 @@
             isAbstract="false"
             name="MicroBlaze archiver"
             superClass="cdt.managedbuild.tool.gnu.archiver">
+      </tool>
+      <tool
+            id="xilinx.gnu.compiler.mb"
+            isAbstract="true"
+            name="Xilinx GNU MB compiler"
+            superClass="xilinx.gnu.compiler">
+         <option
+               category="xilinx.gnu.compiler.inferred.category.hwplatform"
+               command="-mno-xl-reorder"
+               id="xilinx.gnu.mb.compiler.inferred.usereorderinstr"
+               isAbstract="false"
+               name="Do not generate swap instruction (-mno-xl-reorder)"
+               resourceFilter="all"
+               tip="Do not generate swap instruction"
+               valueType="boolean">
+         </option>
+         <option
+               category="xilinx.gnu.compiler.inferred.category.hwplatform"
+               command="-mlittle-endian"
+               id="xilinx.gnu.mb.compiler.inferred.usele"
+               isAbstract="false"
+               name="Produce little endian code (-mlittle-endian)"
+               resourceFilter="all"
+               tip="Produce little endian code"
+               valueType="boolean">
+         </option>
+         <option
+               category="xilinx.gnu.compiler.inferred.category.hwplatform"
+               command="-mxl-barrel-shift"
+               id="xilinx.gnu.mb.compiler.inferred.usebarrel"
+               isAbstract="false"
+               name="Use Barrel Shifter (-mxl-barrel-shift)"
+               resourceFilter="all"
+               tip="Use MicroBlaze Barrel Shifter (MicroBlaze option C_USE_BARREL = 1)"
+               valueType="boolean">
+         </option>
+         <option
+               category="xilinx.gnu.compiler.inferred.category.hwplatform"
+               command="-mxl-pattern-compare"
+               id="xilinx.gnu.mb.compiler.inferred.usepcmp"
+               isAbstract="false"
+               name="Use Pattern Compare (-mxl-pattern-compare)"
+               resourceFilter="all"
+               tip="Use MicroBlaze Pattern Compare Instruction (MicroBlaze option C_USE_PCMP_INSTR = 1)"
+               valueType="boolean">
+         </option>
+         <option
+               category="xilinx.gnu.compiler.inferred.category.hwplatform"
+               command="-mno-xl-soft-div"
+               id="xilinx.gnu.mb.compiler.inferred.usediv"
+               isAbstract="false"
+               name="Use hardware divider (-mno-xl-soft-div)"
+               resourceFilter="all"
+               tip="Use MicroBlaze Hardware Divider (MicroBlaze option C_USE_DIV = 1)"
+               valueType="boolean">
+         </option>
+         <option
+               category="xilinx.gnu.compiler.inferred.category.hwplatform"
+               command="-mcpu=v"
+               id="xilinx.gnu.mb.compiler.inferred.mbversion"
+               isAbstract="false"
+               name="MicroBlaze Version"
+               resourceFilter="all"
+               tip="MicroBlaze Version Specific Optimizations (-mcpu)"
+               valueType="string">
+         </option>
+         <option
+               category="xilinx.gnu.compiler.inferred.category.hwplatform"
+               id="xilinx.gnu.mb.compiler.inferred.mul"
+               name="Hardware Multiplier"
+               resourceFilter="all"
+               tip="MicroBlaze Hardware Multiplier Type (MicroBlaze option C_USE_HW_MUL)"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  command="-mxl-soft-mul"
+                  id="xilinx.gnu.mb.compiler.inferred.mul.none"
+                  isDefault="true"
+                  name="None (Use soft multiplier)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mno-xl-soft-mul"
+                  id="xilinx.gnu.mb.compiler.inferred.mul.32bit"
+                  isDefault="false"
+                  name="Hard Multiplier, 32 bit result (-mno-xl-soft-mul)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mno-xl-soft-mul -mxl-multiply-high"
+                  id="xilinx.gnu.mb.compiler.inferred.mul.64bit"
+                  isDefault="false"
+                  name="Hard Multiplier, 64 bit result (-mno-xl-soft-mul -mxl-multiply-high)">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               category="xilinx.gnu.compiler.inferred.category.hwplatform"
+               id="xilinx.gnu.mb.compiler.inferred.fpu"
+               name="FPU"
+               tip="MicroBlaze Hardware Floating Point Unit Type"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="xilinx.gnu.mb.compiler.inferred.fpu.none"
+                  isDefault="true"
+                  name="No FPU">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mhard-float"
+                  id="xilinx.gnu.mb.compiler.inferred.fpu.basic"
+                  isDefault="false"
+                  name="Basic FPU (-mhard-float)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mhard-float -mxl-float-convert -mxl-float-sqrt"
+                  id="xilinx.gnu.mb.compiler.inferred.fpu.full"
+                  isDefault="false"
+                  name="FPU with fsqrt and fconvert support">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               category="xilinx.gnu.compiler.misc.category"
+               command="-Wl,--no-relax"
+               id="xilinx.gnu.mb.compiler.inferred.norelax"
+               isAbstract="false"
+               name="No relaxation (-Wl,--no-relax)"
+               valueType="boolean">
+         </option>
+         <option
+               category="xilinx.gnu.compiler.misc.category"
+               command="-ffunction-sections -fdata-sections"
+               id="xilinx.gnu.mb.compiler.inferred.garbage"
+               isAbstract="true"
+               name="Enable garbage collector (-ffunction-sections -fdata-sections)"
+               valueType="boolean">
+         </option>
       </tool>
       <tool
             command="mb-gcc"
@@ -355,6 +831,126 @@
                id="xilinx.gnu.mb.cxx.compiler.output"
                outputs="o">
          </outputType>
+      </tool>
+      <tool
+            id="xilinx.gnu.mb.linker"
+            isAbstract="true"
+            name="Xilinx GNU MB Linker"
+            superClass="xilinx.gnu.linker">
+         <option
+               category="xilinx.gnu.linker.inferred.category.hwplatform"
+               command="-mlittle-endian"
+               id="xilinx.gnu.mb.linker.inferred.usele"
+               isAbstract="false"
+               name="Produce little endian artifacts (-mlittle-endian)"
+               resourceFilter="all"
+               tip="Produce little endian artifacts"
+               valueType="boolean">
+         </option>
+         <option
+               category="xilinx.gnu.linker.inferred.category.hwplatform"
+               command="-mxl-barrel-shift"
+               id="xilinx.gnu.mb.linker.inferred.usebarrel"
+               isAbstract="false"
+               name="Use Barrel Shifter (-mxl-barrel-shift)"
+               resourceFilter="all"
+               tip="Use MicroBlaze Barrel Shifter (MicroBlaze option C_USE_BARREL = 1)"
+               valueType="boolean">
+         </option>
+         <option
+               category="xilinx.gnu.linker.inferred.category.hwplatform"
+               command="-mxl-pattern-compare"
+               id="xilinx.gnu.mb.linker.inferred.usepcmp"
+               isAbstract="false"
+               name="Use Pattern Compare (-mxl-pattern-compare)"
+               resourceFilter="all"
+               tip="Use MicroBlaze Pattern Compare Instruction (MicroBlaze option C_USE_PCMP_INSTR = 1)"
+               valueType="boolean">
+         </option>
+         <option
+               category="xilinx.gnu.linker.inferred.category.hwplatform"
+               command="-mno-xl-soft-div"
+               id="xilinx.gnu.mb.linker.inferred.usediv"
+              isAbstract="false"
+               name="Use hardware divider (-mno-xl-soft-div)"
+               resourceFilter="all"
+               tip="Use MicroBlaze Hardware Divider (MicroBlaze option C_USE_DIV = 1)"
+               valueType="boolean">
+         </option>
+         <option
+               category="xilinx.gnu.linker.inferred.category.hwplatform"
+               command="-mcpu=v"
+               id="xilinx.gnu.mb.linker.inferred.mbversion"
+               isAbstract="false"
+               name="MicroBlaze Version"
+               resourceFilter="all"
+               tip="MicroBlaze Version Specific Optimizations (-mcpu)"
+               valueType="string">
+         </option>
+         <option
+               category="xilinx.gnu.linker.inferred.category.hwplatform"
+               id="xilinx.gnu.mb.linker.inferred.mul"
+               name="Hardware Multiplier"
+               resourceFilter="all"
+               tip="MicroBlaze Hardware Multiplier Type (MicroBlaze option C_USE_HW_MUL)"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  command="-mxl-soft-mul"
+                  id="xilinx.gnu.mb.linker.inferred.mul.none"
+                  isDefault="true"
+                  name="None (Use soft multiplier)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mno-xl-soft-mul"
+                  id="xilinx.gnu.mb.linker.inferred.mul.32bit"
+                  isDefault="false"
+                  name="Hard Multiplier, 32 bit result (-mno-xl-soft-mul)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mno-xl-soft-mul -mxl-multiply-high"
+                  id="xilinx.gnu.mb.linker.inferred.mul.64bit"
+                  isDefault="false"
+                  name="Hard Multiplier, 64 bit result (-mno-xl-soft-mul -mxl-multiply-high)">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               category="xilinx.gnu.linker.inferred.category.hwplatform"
+               id="xilinx.gnu.mb.linker.inferred.fpu"
+               name="FPU"
+               tip="MicroBlaze Hardware Floating Point Unit Type"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="xilinx.gnu.mb.linker.inferred.fpu.none"
+                  isDefault="true"
+                  name="No FPU">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mhard-float"
+                  id="xilinx.gnu.mb.linker.inferred.fpu.basic"
+                  isDefault="false"
+                  name="Basic FPU (-mhard-float)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mhard-float -mxl-float-convert -mxl-float-sqrt"
+                  id="xilinx.gnu.mb.linker.inferred.fpu.full"
+                  isDefault="false"
+                  name="FPU with fsqrt and fconvert support">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               category="xilinx.gnu.c.link.category.general"
+               command="-Wl,--no-relax"
+               id="xilinx.gnu.mb.linker.inferred.norelax"
+               name="No relaxation (-Wl,--no-relax)"
+               valueType="boolean">
+         </option>
+         <option
+               category="xilinx.gnu.c.link.category.general"
+               command="-Wl,--gc-sections"
+               id="xilinx.gnu.mb.linker.inferred.garbage"
+               name="Enable garbage collector (-Wl,--gc-sections)"
+               valueType="boolean">
+         </option>
       </tool>
       <tool
             command="mb-gcc"
