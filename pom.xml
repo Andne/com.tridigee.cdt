@@ -47,9 +47,9 @@
 	</licenses>
 
 	<modules>
-		<module>com.tridgee.xilinx.cdt.microblaze</module>
+		<module>com.tridigee.xilinx.cdt.microblaze</module>
 		
-		<module>com.tridigee.cdt</module>
+		<module>com.tridigee.cdt-feature</module>
 	</modules>
 
 	<pluginRepositories>
