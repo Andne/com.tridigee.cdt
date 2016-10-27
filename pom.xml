@@ -26,6 +26,12 @@
 		<help-docs-eclipserun-repo>http://download.eclipse.org/eclipse/updates/4.5</help-docs-eclipserun-repo>
 		<base.test.vmargs>-Xms256m -Xmx512m -ea</base.test.vmargs>
 	</properties>
+	
+	<modules>
+		<module>com.tridigee.xilinx.cdt.microblaze</module>
+		
+		<module>com.tridigee.cdt-feature</module>
+	</modules>
 
 	<licenses>
 		<license>
@@ -40,13 +46,20 @@
       </comments>
 		</license>
 	</licenses>
-
-	<modules>
-		<module>com.tridigee.xilinx.cdt.microblaze</module>
-		
-		<module>com.tridigee.cdt-feature</module>
-	</modules>
-
+	
+	<repositories>
+		<repository>
+			<id>eclipse</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/releases/neon</url>
+		</repository>
+		<repository>
+			<id>cdt</cdt>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/tools/cdt/releases/9.1</url>
+		</repository>
+	</repositories>
+	
 	<pluginRepositories>
    		<pluginRepository>
 			<id>cbi</id>
@@ -61,6 +74,14 @@
 				<artifactId>tycho-maven-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-repository-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<includeAllDependencies>true</includeAllDependencies>
+				</configuration>
 			</plugin>
 		</plugins>
 		<pluginManagement>
