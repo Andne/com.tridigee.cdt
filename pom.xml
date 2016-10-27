@@ -24,6 +24,7 @@
 		<sonar.java.source>1.7</sonar.java.source>
 		<target-platform>cdt</target-platform>
 		<help-docs-eclipserun-repo>http://download.eclipse.org/eclipse/updates/4.5</help-docs-eclipserun-repo>
+		<tycho.scmUrl>https://github.com/Andne/com.tridigee.cdt.git</tycho.scmUrl>
 		<base.test.vmargs>-Xms256m -Xmx512m -ea</base.test.vmargs>
 	</properties>
 	
