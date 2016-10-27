@@ -768,7 +768,7 @@
             isAbstract="false"
             name="MicroBlaze gcc compiler"
             superClass="xilinx.gnu.compiler.mb"
-            natureFilter="cnature"
+            natureFilter="both"
             outputFlag="-o">
          <supportedProperties>
             <property
@@ -781,14 +781,54 @@
                </value>
             </property>
          </supportedProperties>
+         <optionCategory
+               owner="xilinx.gnu.mb.c.compiler"
+               name="Dialect"
+               id="xilinx.gnu.mb.c.compiler.category.dialect">
+         </optionCategory>
+         <option
+               category="xilinx.gnu.mb.c.compiler.category.dialect"
+               defaultValue="false"
+               id="xilinx.gnu.mb.c.compiler.option.dialect.std"
+               name="Language standard"
+               useByScannerDiscovery="true"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  name=""
+                  command=""
+                  id="xilinx.gnu.mb.c.compiler.dialect.default">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  name="ISO C90 / ANSI C89 (-std=c90)"
+                  command="-std=c90"
+                  id="xilinx.gnu.mb.c.compiler.dialect.c90">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  name="ISO C99 (-std=c99)"
+                  command="-std=c99"
+                  id="xilinx.gnu.mb.c.compiler.dialect.c99">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  name="ISO C11 (-std=c11)"
+                  command="-std=c11"
+                  id="xilinx.gnu.mb.c.compiler.dialect.c11">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               name="Other dialect flags"
+               category="xilinx.gnu.mb.c.compiler.category.dialect"
+               id="xilinx.gnu.mb.c.compiler.option.dialect.flags"
+               useByScannerDiscovery="true"
+               valueType="string">
+         </option>
          <inputType
+               sourceContentType="org.eclipse.cdt.core.cSource"
                dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.gnu.DefaultGCCDependencyCalculator2"
                dependencyContentType="org.eclipse.cdt.core.cHeader"
                dependencyExtensions="h"
-               id="xilinx.gnu.compiler.input"
+               id="xilinx.gnu.mb.c.compiler.input"
                languageId="org.eclipse.cdt.core.gcc"
-               name="C source files"
-               sources="c,S">
+               sources="c">
          </inputType>
          <outputType
                buildVariable="OBJS"
@@ -816,13 +856,53 @@
                </value>
             </property>
          </supportedProperties>
+         <optionCategory
+               owner="xilinx.gnu.mb.cxx.compiler"
+               name="Dialect"
+               id="xilinx.gnu.mb.cxx.compiler.category.dialect">
+         </optionCategory>
+         <option
+               category="xilinx.gnu.mb.cxx.compiler.category.dialect"
+               defaultValue="false"
+               id="xilinx.gnu.mb.cxx.compiler.option.dialect.std"
+               name="Language standard"
+               useByScannerDiscovery="true"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  name=""
+                  command=""
+                  id="xilinx.gnu.mb.cxx.compiler.dialect.default">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  name="ISO C++98 (-std=c++98)"
+                  command="-std=c++98"
+                  id="xilinx.gnu.mb.cxx.compiler.dialect.c++98">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  name="ISO C++11 (-std=c++0x)"
+                  command="-std=c++0x"
+                  id="xilinx.gnu.mb.cxx.compiler.dialect.c++11">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  name="ISO C++14 (-std=c++1y)"
+                  command="-std=c++1y"
+                  id="xilinx.gnu.mb.cxx.compiler.dialect.c++14">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               name="Other dialect flags"
+               category="xilinx.gnu.mb.cxx.compiler.category.dialect"
+               id="xilinx.gnu.mb.cxx.compiler.option.dialect.flags"
+               useByScannerDiscovery="true"
+               valueType="string">
+         </option>
          <inputType
+               sourceContentType="org.eclipse.cdt.core.cxxSource"
                dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.gnu.DefaultGCCDependencyCalculator2"
                dependencyContentType="org.eclipse.cdt.core.cxxHeader"
                dependencyExtensions="h,H,hpp"
                id="xilinx.gnu.mb.cxx.compiler.input"
                languageId="org.eclipse.cdt.core.g++"
-               name="C++ source files"
                sources="c,C,cc,cxx,cpp,S">
          </inputType>
          <outputType
