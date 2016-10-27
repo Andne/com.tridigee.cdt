@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Microblaze Makefile Support
 Bundle-SymbolicName: com.tridigee.xilinx.cdt.microblaze;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: TRIDIGEE
+Bundle-Vendor: Tridigee Solutions
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.cdt.core;bundle-version="6.0.0",
  org.eclipse.cdt.managedbuilder.core;bundle-version="8.4.0",
