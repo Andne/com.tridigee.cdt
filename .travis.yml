@@ -1,11 +1,22 @@
 language: java
 
 jdk:
-  - oraclejdk8
+- oraclejdk8
 
 cache:
   directories:
-  - $HOME/.m2
+  - "$HOME/.m2"
 
 script:
-  - mvn clean verify
+- mvn clean verify
+
+deploy:
+  skip_cleanup: true
+
+after_deploy:
+- gem install travis_github_deployer
+- travis_github_deployer
+
+env:
+  global:
+    secure: bRKjCoeXQ+byAUKZA6jHGXvPkJGwfD/hMJaSq15miMaeb2Wxl+l1Ly2tAHqB2Fyxu86OiRi4/D72V14aCG93DRnI2kyVHzDmsei8A/XjcZ4FXiwoE+i188oSrkeU9Eze9tx6k3ncJW18hCQlB6RNS7PLLzAuGPuFuzjn0nA2u38d0x5KN3m5r9Ayi+gDlHSkPonLUYsiCPuTV/kU5XGv5ifXEBLOkUrCIXFu0xzxdKhNEw8+PIKq12x4Tgb8LriLSJBBw/B+aphlTp//H5ukCaw8eA4ZCnX+j4lqlhlj0ifDhAOc3oGU2HJKEE4lmdotZGrUlMImK8zgFhOJeETLYiQbMsqsmxg+D9mulw9rtjPH++vAE8mOo9et5hj7rXEWyKicYTUFM3MugHhlEH8JbWsE3WlaCRYBmN4b/RXf1G82HZ0+RNCQhbr4ihTEUH/dkF/QNRHPL+teBMchJVkiQARsw1Ngs5evsTTDr2Bnogn864efQTP5axcFOBvyPfrwBo3o1ZQPppWZEuw0T2GpRESzNkb0ebGEJk83a1R6oZwhvJGp1I34FV4PqOlQbdEfopaY1vtPqnle4qtsbIyqttxv1sv3pY3KKi3Jy/qnolOEvuu9aC/VPZVmWBUhWG3IXtQDNrI98vTEM2TkT3t8jcq7OlkRgLPXruK9e+vE9z4=

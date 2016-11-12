@@ -1,0 +1,6 @@
+destination_repository: https://github.com/Andne/andne.github.io.git
+
+files_to_deploy:
+  com.tridigee.cdt-repo/target/repository/*:
+    destination: repos/com.tridigee.cdt
+    purge: yes
