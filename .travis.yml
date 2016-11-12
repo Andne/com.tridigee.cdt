@@ -7,15 +7,16 @@ cache:
   directories:
   - "$HOME/.m2"
 
+install:
+- gem install travis_github_deployer
+
 script:
 - mvn clean verify
 
 deploy:
   skip_cleanup: true
-
-after_deploy:
-- gem install travis_github_deployer
-- travis_github_deployer
+  provider: script
+  script: travis_github_deployer
 
 env:
   global:
